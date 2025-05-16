@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "NTT29G588M.com.azemliankin.exampleapp",
+        "paths": ["*"]
+      }
+    ]
+  }
+}
