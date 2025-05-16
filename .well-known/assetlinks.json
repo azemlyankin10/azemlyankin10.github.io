@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "com.example.fooddetection",
+                 "sha256_cert_fingerprints": ["6B:67:32:D3:31:75:5D:20:7F:37:AA:AB:EB:92:A7:D1:97:12:71:12:D0:89:89:9A:54:8A:32:5B:66:F2:13:E6"] }
+  }]
