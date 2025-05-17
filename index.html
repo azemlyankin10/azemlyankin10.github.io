@@ -1,12 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <title>Redirecting to App...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+    <script type="text/javascript">
+        // Parse query params from current URL
+        function getQueryParams() {
+            return window.location.search || '';
+        }
+
+        // Function to detect platform
+        function getMobileOperatingSystem() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) return "iOS";
+            if (/android/i.test(userAgent)) return "Android";
+            return "unknown";
+        }
+
+        // Function to redirect
+        function redirect() {
+            var os = getMobileOperatingSystem();
+            var query = getQueryParams();
+            var appDeepLink = "fooddetection://reset" + query; // Pass params to app
+            var appStoreLink = "https://apps.apple.com/app/fooddetection/id6789012345";
+            var playStoreLink = "https://play.google.com/store/apps/details?id=com.azemliankin.fooddetection";
+            var webFallback = "https://azemliankin.com/fooddetection";
+            var now = new Date().valueOf();
+
+            if (os === "iOS") {
+                window.location.href = appDeepLink;
+                setTimeout(function() {
+                    if (new Date().valueOf() - now < 1500) {
+                        window.location.href = appStoreLink;
+                    }
+                }, 1000);
+            } else if (os === "Android") {
+                window.location.href = appDeepLink;
+                setTimeout(function() {
+                    if (new Date().valueOf() - now < 1500) {
+                        window.location.href = playStoreLink;
+                    }
+                }, 1000);
+            } else {
+                window.location.href = webFallback + query;
+            }
+        }
+
+        window.onload = redirect;
+    </script>
 </head>
 <body>
-    
-    <p>Please wait while we redirect you to the application.</p>
+    <div style="text-align: center; padding-top: 50px;">
+        <h2>Redirecting to App...</h2>
+        <p>If you are not redirected automatically, <a id="deeplink" href="fooddetection://">click here</a>.</p>
+    </div>
+    <script>
+        // Update the manual link as well
+        var query = window.location.search || '';
+        document.getElementById('deeplink').href = "fooddetection://reset" + query;
+    </script>
 </body>
 </html>
